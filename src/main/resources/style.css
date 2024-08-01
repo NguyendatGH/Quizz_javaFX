@@ -1,0 +1,29 @@
+/* Định dạng cho Label hiển thị câu hỏi */
+#questionLabel {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+/* Định dạng cho các RadioButton trong hộp lựa chọn */
+#optionsBox .radio-button {
+    -fx-font-size: 16px;
+    -fx-padding: 5;
+}
+
+/* Định dạng cho Button */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Định dạng cho Label hiển thị kết quả */
+#resultLabel {
+    -fx-font-size: 18px;
+    -fx-text-fill: red;
+    -fx-padding: 10;
+}
