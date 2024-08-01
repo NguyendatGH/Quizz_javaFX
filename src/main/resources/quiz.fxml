@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.QuizController" prefHeight="Infinity" prefWidth="Infinity" stylesheets="@styles.css">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.QuizController" prefHeight="Infinity" prefWidth="Infinity" stylesheets="style.css">
     <Label fx:id="questionLabel" text="Question" />
     <VBox spacing="10" fx:id="optionsBox">
         <children>
