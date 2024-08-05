@@ -2,11 +2,14 @@ package com.example.controller;
 
 import com.example.model.Question;
 import com.example.model.Quiz;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 public class QuizController {
 
@@ -18,6 +21,12 @@ public class QuizController {
 
     @FXML
     private Label resultLabel;
+
+    @FXML
+    private Button nextQuest;
+
+    @FXML
+    private Button prevQuest;
 
     private ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -50,8 +59,10 @@ public class QuizController {
         if (selectedRadioButton != null) {
             String selectedAnswer = selectedRadioButton.getText();
             String correctAnswer = quiz.getCurrentQuestion().getAnswer();
+            System.out.println(correctAnswer);
             if (selectedAnswer.equals(correctAnswer)) {
                 resultLabel.setText("Correct!");
+                quiz.incrementCorrectChoiceCount();
             } else {
                 resultLabel.setText("Wrong! Correct answer is: " + correctAnswer);
             }
@@ -59,11 +70,32 @@ public class QuizController {
                 quiz.nextQuestion();
                 displayQuestion(quiz.getCurrentQuestion());
             } else {
-                questionLabel.setText("Quiz completed!");
+                questionLabel
+                        .setText("Quiz completed!, your number of correct question is " + quiz.countCorrectChoice());
                 optionsBox.getChildren().clear();
+                prevQuest.setVisible(false);
+                nextQuest.setText("Close app");
+                nextQuest.setOnAction(event -> handleCloseApp());
+
             }
         } else {
             resultLabel.setText("Please select an answer.");
         }
+    }
+
+    @FXML
+    private void handlePrev() {
+        if (quiz.hasPrevQuestion()) {
+            quiz.previousQuest();
+            prevQuest.setVisible(quiz.hasPrevQuestion());
+        } else {
+            resultLabel.setText("No previous question.");
+            prevQuest.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void handleCloseApp() {
+        System.exit(0);
     }
 }
