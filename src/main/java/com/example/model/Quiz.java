@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Quiz {
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int correctChoice = 0;
-
     private List<Question> questionHistory = new ArrayList<>();
 
     public Quiz() {
@@ -21,11 +20,15 @@ public class Quiz {
 
     private void loadQuestions() {
         try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/data.json"))) {
-            if (reader == null) {
-                throw new IllegalArgumentException("File not found: /data.json");
+            Type questionListType = new TypeToken<List<Question>>() {
+            }.getType();
+            List<Question> loadedQuest = new Gson().fromJson(reader, questionListType);
+            if (loadedQuest != null) {
+                questions = loadedQuest;
+                System.out.println(questions);
+            }else{
+                System.out.println("null");
             }
-            Type questionListType = new TypeToken<List<Question>>() {}.getType();
-            questions = new Gson().fromJson(reader, questionListType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,23 +52,23 @@ public class Quiz {
         }
     }
 
-    public boolean hasPrevQuestion(){
+    public boolean hasPrevQuestion() {
         return !questionHistory.isEmpty();
     }
 
-    public void previousQuest(){
-        if(hasPrevQuestion()){
-            currentQuestionIndex--;
-            questionHistory.remove(questionHistory.size() -1);
+    public void previousQuest() {
+        if (hasPrevQuestion()) {
+            questionHistory.remove(questionHistory.size() - 1);
+            currentQuestionIndex = Math.max(0, currentQuestionIndex - 1);
         }
     }
 
     public int countCorrectChoice() {
         return correctChoice;
     }
-    
+
     public void incrementCorrectChoiceCount() {
         correctChoice++;
     }
-    
+
 }

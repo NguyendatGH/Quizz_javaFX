@@ -24,6 +24,12 @@
 }
 
 
+#BtnArea{
+    -fx-padding: 20px 0 0 0px;
+}
+
+
+
 .button {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;

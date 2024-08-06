@@ -2,26 +2,31 @@
     {
         "question": "Thủ đô của Ý là gì?",
         "options": ["Rome", "Venice", "Milan", "Naples"],
-        "answer": "Rome"
+        "answer": ["Rome"]
     },
     {
         "question": "Ai là tác giả của 'Chiến tranh và Hòa bình'?",
         "options": ["Leo Tolstoy", "Fyodor Dostoevsky", "Ivan Turgenev", "Anton Chekhov"],
-        "answer": "Leo Tolstoy"
+        "answer": ["Leo Tolstoy"]
     },
     {
         "question": "Thành phố nào là thủ đô của Đức?",
         "options": ["Berlin", "Munich", "Frankfurt", "Hamburg"],
-        "answer": "Berlin"
+        "answer": ["Berlin"]
     },
     {
         "question": "Ai là tác giả của 'Pride and Prejudice'?",
         "options": ["Jane Austen", "Emily Bronte", "Mary Shelley", "Charlotte Bronte"],
-        "answer": "Jane Austen"
+        "answer": ["Jane Austen"]
     },
     {
         "question": "Thủ đô của Tây Ban Nha là gì?",
         "options": ["Madrid", "Barcelona", "Valencia", "Seville"],
-        "answer": "Madrid"
+        "answer": ["Madrid"]
+    },
+    {
+        "question": "Bình phương của số nào dưới đây = 4?",
+        "options": ["-2", "0", "2", "3"],
+        "answer": ["-2", "2"]
     }
 ]
