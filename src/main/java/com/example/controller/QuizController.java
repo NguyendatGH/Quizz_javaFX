@@ -3,26 +3,32 @@ package com.example.controller;
 import com.example.model.Question;
 import com.example.model.Quiz;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+
 
 public class QuizController {
 
     @FXML
-    private Label questionLabel;
+    private Text questionText;
 
     @FXML
     private VBox optionsBox;
 
     @FXML
-    private Label resultLabel;
+    private Text resultText;
 
     @FXML
     private Button nextQuest;
@@ -31,21 +37,50 @@ public class QuizController {
     private Button prevQuest;
 
 
+
+    @FXML
+    private Label countdownLabel;
+
+    
+    private Timeline timeline;
+    private LocalTime endTime;
+
     private Quiz quiz = new Quiz();
 
     @FXML
     public void initialize() {
         if (quiz.getCurrentQuestion() != null) {
             displayQuestion(quiz.getCurrentQuestion());
+            LocalTime duration = LocalTime.of(1, 0, 0);
+            
+            endTime = LocalTime.now().plusHours(duration.getHour()).plusMinutes(duration.getMinute()).plusSeconds(duration.getSecond());
+
+            timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateClock()));
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.play();
         } else {
-            questionLabel.setText("No questions available!");
+            questionText.setText("No questions available!");
             optionsBox.getChildren().clear();
         }
     }
 
+    private void updateClock(){
+        LocalTime now = LocalTime.now();
+        LocalTime remainTime = LocalTime.ofSecondOfDay(endTime.toSecondOfDay() - now.toSecondOfDay());
+
+        if(remainTime.toSecondOfDay() <= 0){
+            countdownLabel.setText("00:00:00");
+            timeline.stop();
+        }else{
+            countdownLabel.setText(String.format("%02d:%02d:%02d", remainTime.getHour(), remainTime.getMinute(), remainTime.getSecond()));
+            
+        }
+    }
+
+
     private void displayQuestion(Question question) {
         if (question != null) {
-            questionLabel.setText(question.getQuestion());
+            questionText.setText(question.getQuestion());
             optionsBox.getChildren().clear();
 
             List<String> userChoices = question.getUserchoice();
@@ -58,9 +93,9 @@ public class QuizController {
                 checkBox.setSelected(userChoices.contains(option));
                 optionsBox.getChildren().add(checkBox);
             }
-            resultLabel.setText("");
+            resultText.setText("");
         } else {
-            questionLabel.setText("Quiz completed!");
+            questionText.setText("Quiz completed!");
             optionsBox.getChildren().clear();
         }
     }
@@ -91,10 +126,10 @@ public class QuizController {
 
 
             if (allCorrect) {
-                resultLabel.setText("Correct!");
+                resultText.setText("Correct!");
                 quiz.incrementCorrectChoiceCount();
             } else {
-                resultLabel.setText("Wrong! Correct answer is: " + String.join(", ", correctAnswers));
+                resultText.setText("Wrong! Correct answer is: " + String.join(", ", correctAnswers));
             }
 
             quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
@@ -103,17 +138,17 @@ public class QuizController {
                 quiz.nextQuestion();
                 displayQuestion(quiz.getCurrentQuestion());
             } else {
-                questionLabel
+                questionText
                         .setText("Quiz completed!, your number of correct question is " + quiz.countCorrectChoice());
                 optionsBox.getChildren().clear();
                 prevQuest.setVisible(false);
                 nextQuest.setText("Close app");
                 nextQuest.setOnAction(event -> handleCloseApp());
-                resultLabel.setText("");
+                resultText.setText("");
 
             }
         } else {
-            resultLabel.setText("Please select an answer.");
+            resultText.setText("Please select an answer.");
         }
     }
 
@@ -123,7 +158,7 @@ public class QuizController {
             quiz.previousQuest();
             displayQuestion(quiz.getCurrentQuestion());
         } else {
-            resultLabel.setText("No previous question.");
+            resultText.setText("No previous question.");
         }
     }
 
@@ -131,6 +166,7 @@ public class QuizController {
 
     @FXML
     private void handleCloseApp() {
+        System.gc();
         System.exit(0);
     }
 }

@@ -2,18 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="com.example.controller.QuizController" prefHeight="Infinity" prefWidth="Infinity"
     stylesheets="style.css">
     <HBox styleClass="hbox" spacing="200" prefHeight="Infinity" prefWidth="Infinity">
-        <VBox>
-            <Label fx:id="questionLabel" text="Question" />
+        <VBox spacing="20" styleClass="QuestionRender">
+            <Text fx:id="questionText" text="Question" wrappingWidth="1200" />
             <VBox spacing="10" fx:id="optionsBox">
                 <children>
                     <CheckBox text="" />
@@ -26,12 +27,12 @@
                 <Button fx:id="prevQuest" text="prev" onAction="#handlePrev"></Button>
                 <Button fx:id="nextQuest" text="next" onAction="#handleNext"></Button>
             </HBox>
-            <Label fx:id="resultLabel" text="" />
+            <Text fx:id="resultText" text="" />
         </VBox>
 
 
-        <VBox spacing="10" fx:id="questionBox" styleClass="QuestionBox">
-            <Label text="Question" />
+        <VBox spacing="10" fx:id="Timer" styleClass="countDowncLock">
+            <Label fx:id="countdownLabel" text="01:00:00" style="-fx-font-size: 36px; -fx-text-fill: black;" />
         </VBox>
 
     </HBox>
