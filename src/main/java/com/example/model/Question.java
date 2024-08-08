@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Question {
     private String question;
+    private String description;
     private List<String> options;
     private List<String> answer;
     private List<String> userChoices;
 
-    public Question(String question, List<String> options, List<String> answer) {
+    public Question(String question,String description, List<String> options, List<String> answer) {
         this.question = question;
+        this.description = description;
         this.options = options;
         this.answer = answer;
         this.userChoices = new ArrayList<>();
@@ -22,6 +24,14 @@ public class Question {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getDescript(){
+        return description;
+    }
+
+    public void setDescription(String des){
+        this.description = des;
     }
 
     public List<String> getOptions() {

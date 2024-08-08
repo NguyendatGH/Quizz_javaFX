@@ -71,4 +71,8 @@ public class Quiz {
         correctChoice++;
     }
 
+    public List<Question> getQuestionHistory() {
+        return questionHistory;
+    }
+
 }

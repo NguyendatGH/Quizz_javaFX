@@ -1,3 +1,16 @@
+
+.header_QuizApp{
+    -fx-border-color: black;
+    -fx-padding: 20px 0 0 20px;
+}
+.wrapper_horizontal{
+
+}
+.infor{
+    -fx-font-size: 18px;
+    -fx-font-family: Poppins;
+}
+
 .hbox {
     -fx-padding: 30px 0 0 20px;
     -ms-flex-direction: row; 
@@ -55,7 +68,7 @@
     -fx-fill: red;
     -fx-padding: 10;
 }
-
+/* 
 .countDowncLock {
     -fx-pref-width: 280px;
     -fx-pref-height: 200px;
@@ -76,4 +89,4 @@
     -fx-border-color: #666666; 
     -fx-border-width: 1; 
     -fx-border-radius: 50%;
-}
+} */

@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.setTitle("Quiz App");
         primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN)); // ctrl +x to exit full screen mode
+        // primaryStage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN)); // ctrl +x to exit full screen mode
         primaryStage.setFullScreenExitHint(""); // auto hide key exit
         primaryStage.show();
     }

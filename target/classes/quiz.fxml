@@ -12,9 +12,22 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="com.example.controller.QuizController" prefHeight="Infinity" prefWidth="Infinity"
     stylesheets="style.css">
-    <HBox styleClass="hbox" spacing="200" prefHeight="Infinity" prefWidth="Infinity">
-        <VBox spacing="20" styleClass="QuestionRender">
+    <VBox styleClass="header_QuizApp" prefWidth="Infinity" prefHeight="150" spacing="10">
+        <HBox spacing="30" styleClass="wrapper_horizontal">
+            <VBox  spacing="10">
+                <Label styleClass="infor" text="Subjec: SSG104" ></Label>
+                <Label styleClass="infor" text="Date: 11/1/2001" ></Label>
+            </VBox>
+            <VBox spacing="10">
+                <Label styleClass="infor" text="Username:Ngo Van Nam" ></Label>
+                <Label styleClass="infor" text="Type account: basic" ></Label>
+            </VBox>
+        </HBox>
+    </VBox>
+    <HBox styleClass="hbox" spacing="200" prefHeight="500" prefWidth="Infinity" >
+        <VBox spacing="10" styleClass="QuestionRender">
             <Text fx:id="questionText" text="Question" wrappingWidth="1200" />
+            <Text fx:id="questDecription" text="choose 1 option" wrappingWidth="500" />
             <VBox spacing="10" fx:id="optionsBox">
                 <children>
                     <CheckBox text="" />
@@ -32,8 +45,10 @@
 
 
         <VBox spacing="10" fx:id="Timer" styleClass="countDowncLock">
-            <Label fx:id="countdownLabel" text="01:00:00" style="-fx-font-size: 36px; -fx-text-fill: black;" />
+            <Label fx:id="countdownLabel" text="01:00:00"
+                style="-fx-font-size: 36px; -fx-text-fill: black;" />
+                <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" />
         </VBox>
-
     </HBox>
+    <Button fx:id="closeApp" onAction="#handleCloseApp">click to close App</Button>
 </VBox>
