@@ -18,6 +18,14 @@ public class Question {
         this.userChoices = new ArrayList<>();
     }
 
+    public Question(Question cpyQuestion){ //cpy == copy question
+        this.question = cpyQuestion.question;
+        this.description = cpyQuestion.description;
+        this.options = new ArrayList<>(cpyQuestion.options);
+        this.answer = new ArrayList<>(cpyQuestion.answer);
+        this.userChoices = new ArrayList<>(cpyQuestion.userChoices);
+    }
+
     public String getQuestion() {
         return question;
     }

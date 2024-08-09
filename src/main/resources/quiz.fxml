@@ -22,6 +22,7 @@
                 <Label styleClass="infor" text="Username:Ngo Van Nam"></Label>
                 <Label styleClass="infor" text="Type account: basic"></Label>
             </VBox>
+            <Label fx:id="userPoint" text=""></Label>
         </HBox>
     </VBox>
     <HBox styleClass="hbox" spacing="200" prefHeight="500" prefWidth="Infinity">

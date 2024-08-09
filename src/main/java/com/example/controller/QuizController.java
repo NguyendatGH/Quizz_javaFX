@@ -3,7 +3,6 @@ package com.example.controller;
 import com.example.model.Question;
 import com.example.model.Quiz;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +47,9 @@ public class QuizController {
 
     @FXML
     private Button submitButton;
+
+    @FXML
+    private Label userPoint;
 
     private Timeline timeline;
 
@@ -142,31 +144,26 @@ public class QuizController {
             boolean allCorrect = correctAnswers.containsAll(selectedAnswers);
 
             if (allCorrect) {
-                resultText.setText("Correct!");
                 quiz.incrementCorrectChoiceCount();
-            } else {
-                resultText.setText("Wrong! Correct answer is: " + String.join(", ", correctAnswers));
             }
 
             quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
 
-            resultHistory.add(quiz.getCurrentQuestion());
+            resultHistory.add(new Question(quiz.getCurrentQuestion()));
 
             if (quiz.hasMoreQuestions()) {
                 quiz.nextQuestion();
                 displayQuestion(quiz.getCurrentQuestion());
                 prevQuest.setVisible(true);
             } else {
-                // questionText
-                // .setText("Quiz completed!, your number of correct question is " +
-                // quiz.countCorrectChoice());
-                questDecription.setText("");
                 resultText.setText("Last question!, click submit to see your result");
 
             }
+            resultHistory.add(new Question(quiz.getCurrentQuestion()));
         } else {
             resultText.setText("Please select an answer.");
         }
+
     }
 
     @FXML
@@ -174,7 +171,6 @@ public class QuizController {
         if (quiz.hasPrevQuestion()) {
             quiz.previousQuest();
             displayQuestion(quiz.getCurrentQuestion());
-
         } else {
             resultText.setText("No previous question.");
         }
@@ -191,13 +187,14 @@ public class QuizController {
         if (confirmSubmit.isSelected()) {
             List<String> selectedAnswers = getSelectedAnswer();
             quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
-            resultHistory.add(quiz.getCurrentQuestion());
+            resultHistory.add(new Question(quiz.getCurrentQuestion()));
             resultIndex = 0;
             resultText.setText("");
             displayResult();
             if (timeline != null) {
                 timeline.stop();
             }
+            userPoint.setText("Score: "+quiz.countCorrectChoice());
         }
         if (closeAppEnable == true) {
             submitButton.setText("Close app");
