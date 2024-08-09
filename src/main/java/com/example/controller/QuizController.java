@@ -49,26 +49,24 @@ public class QuizController {
 
 
     private Timeline timeline;
-    private LocalTime endTime;
 
     private Quiz quiz = new Quiz();
 
     private List<Question> resultHistory = new ArrayList<>();
     private int resultIndex = 0; 
 
+    private int limitTime;
 
     @FXML
     public void initialize() {
         if (quiz.getCurrentQuestion() != null) {
             displayQuestion(quiz.getCurrentQuestion());
-            LocalTime duration = LocalTime.of(1, 0, 0);
-
-            endTime = LocalTime.now().plusHours(duration.getHour()).plusMinutes(duration.getMinute())
-                    .plusSeconds(duration.getSecond());
+            limitTime = 3600;
 
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateClock()));
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.play();
+            System.out.println("Timeline started.");
         } else {
             questionText.setText("No questions available!");
             questDecription.setText("");
@@ -77,18 +75,24 @@ public class QuizController {
     }
 
     private void updateClock() {
-        LocalTime now = LocalTime.now();
-        LocalTime remainTime = LocalTime.ofSecondOfDay(endTime.toSecondOfDay() - now.toSecondOfDay());
-
-        if (remainTime.toSecondOfDay() <= 0) {
+       try{
+        
+        if (limitTime <= 0) {
             countdownLabel.setText("00:00:00");
             timeline.stop();
             handleSubmit();
         } else {
-            countdownLabel.setText(String.format("%02d:%02d:%02d", remainTime.getHour(), remainTime.getMinute(),
-                    remainTime.getSecond()));
+            limitTime = limitTime - 1;
+            int hours = limitTime / 3600;
+            int min = (limitTime % 3600) / 60;
+            int sec = limitTime % 60;
 
+
+            countdownLabel.setText(String.format("%02d:%02d:%02d", hours, min, sec));
         }
+       }catch(Exception e){
+        e.printStackTrace();
+       }
     }
 
     
