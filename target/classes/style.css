@@ -68,6 +68,15 @@
     -fx-fill: red;
     -fx-padding: 10;
 }
+
+#Score_quiz{
+    -fx-font-size: 32px;
+    -fx-font-family: Poppins;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-wrap-text: true;
+}
+
 /* 
 .countDowncLock {
     -fx-pref-width: 280px;
