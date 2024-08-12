@@ -1,0 +1,101 @@
+
+.header_QuizApp{
+    -fx-border-color: black;
+    -fx-padding: 20px 0 0 20px;
+}
+.wrapper_horizontal{
+
+}
+.infor{
+    -fx-font-size: 18px;
+    -fx-font-family: Poppins;
+}
+
+.hbox {
+    -fx-padding: 30px 0 0 20px;
+    -ms-flex-direction: row; 
+}
+
+.QuestionRender {
+    -fx-background-color: lightblue;
+    -fx-max-width: 1200px;
+    -fx-pref-width: 1200px;
+}
+
+#questionText {
+    -fx-font-size: 20px;
+    -fx-font-family: Poppins;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-wrap-text: true;
+    -fx-max-width: 1200px;
+    -fx-pref-width: 1200px;
+    
+}
+
+#optionsBox{
+    -fx-padding: 10px 0px 0px 0px;
+}
+
+
+#optionsBox .radio-button {
+    -fx-font-size: 16px;
+    -fx-padding: 5;
+}
+
+
+#BtnArea{
+    -fx-padding: 20px 0 0 0px;
+}
+
+
+
+.button {
+    -fx-background-color: #64a866;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button:hover{
+    background-color: #74b977;
+}
+
+#resultText {
+    -fx-font-size: 18px;
+    -fx-fill: red;
+    -fx-padding: 10;
+}
+
+#Score_quiz{
+    -fx-font-size: 32px;
+    -fx-font-family: Poppins;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-wrap-text: true;
+}
+
+/* 
+.countDowncLock {
+    -fx-pref-width: 280px;
+    -fx-pref-height: 200px;
+    -fx-alignment: center; 
+    -fx-background-color: #ffffffd7; 
+    -fx-padding: 0; 
+    -fx-border-color: #14e96d; 
+    -fx-border-width: 2; 
+    -fx-border-radius: 50%;
+}
+
+#countDownLabel {
+    -fx-font-size: 36px; 
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-background-color: #ffffff; 
+    -fx-padding: 0; 
+    -fx-border-color: #666666; 
+    -fx-border-width: 1; 
+    -fx-border-radius: 50%;
+} */

@@ -135,21 +135,11 @@ public class QuizController {
         return selectedAnswer;
     }
 
-    
-
     @FXML
     private void handleNext() {
         List<String> selectedAnswers = getSelectedAnswer();
 
         quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
-
-        List<String> correctAnswers = quiz.getCurrentQuestion().getAnswer();
-
-        boolean allCorrect = correctAnswers.containsAll(selectedAnswers);
-
-        if (allCorrect) {
-            quiz.incrementCorrectChoiceCount();
-        }
 
         if (quiz.hasMoreQuestions() || !quiz.getCurrentQuestion().getOptions().isEmpty()) {
             if (quiz.hasMoreQuestions()) {
@@ -185,28 +175,44 @@ public class QuizController {
     }
 
     private void calScore(int totalQuestion) {
-        int correctQuest = quiz.countCorrectChoice();
-        
+        int correctQuest = quiz.countCorrectQuest();
+
         double accuracyRate = (double) correctQuest / totalQuestion;
-    
         double final_Score = accuracyRate * 10;
-    
-        userPoint.setText("Your score: " + String.valueOf(final_Score));       
+
+        String formattedScore = String.format("%.2f", final_Score);
+
+        userPoint.setText("Your score: " + formattedScore +"("+ correctQuest + "/" + quiz.getAllQuestions().size()+ ")");
     }
-    
 
     @FXML
     private void handleSubmit() {
         if (confirmSubmit.isSelected() || limitTime <= 0) {
-            List<String> selectedAnswers = getSelectedAnswer();
-            quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
+           
+            for (Question question : quiz.getAllQuestions()) {
+                List<String> userChoices = getSelectedAnswer();
+                question.setUserChoices(userChoices);
+            }
+    
+            
+            for (Question quest : quiz.getAllQuestions()) {
+                List<String> userChoices = quest.getUserchoice();
+                List<String> correctAnswers = quest.getAnswer();
+    
+                if (userChoices != null && correctAnswers != null) {
+                    boolean allCorrect = correctAnswers.size() == userChoices.size() && correctAnswers.containsAll(userChoices);
+                    if (allCorrect) {
+                       quiz.incrementCorrectChoiceCount();
+                    }
+                }
+            }
 
             resultText.setText("");
             displayResult();
             if (timeline != null) {
                 timeline.stop();
             }
-            calScore(quiz.getAllQuestions().size());   
+            calScore(quiz.getAllQuestions().size());
 
             if (closeAppEnable) {
                 submitButton.setText("Close app");
@@ -214,12 +220,10 @@ public class QuizController {
                 submitButton.setOnAction(event -> handleCloseApp());
             }
 
-        }else{
+        } else {
             resultText.setText("please confirm submission.");
         }
     }
-
-    
 
     @FXML
     private void displayResult() {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Quiz {
     private List<Question> questions = new ArrayList<>();
     private int currentQuestionIndex = 0;
-    private int correctChoice = 0;
+    private int correctQuest = 0;
 
     public Quiz() {
         loadQuestions();
@@ -74,12 +74,17 @@ public class Quiz {
         }
     }
 
-    public int countCorrectChoice() {
-        return correctChoice;
+    public int countCorrectQuest() {
+        return correctQuest;
     }
 
+    public void setCountCorrectQuest(int correctQuest){
+        this.correctQuest = correctQuest;
+    }
+
+
     public void incrementCorrectChoiceCount() {
-        correctChoice++;
+        correctQuest++;
     }
 
     public List<Question> getAllQuestions() {
