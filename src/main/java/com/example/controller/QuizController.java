@@ -49,7 +49,7 @@ public class QuizController {
     private Button submitButton;
 
     @FXML
-    private Label userPoint;
+    private Text userPoint;
 
     private Timeline timeline;
 
@@ -59,12 +59,11 @@ public class QuizController {
 
     private int limitTime;
 
-    private boolean closeAppEnable = false;
+    private boolean closeAppEnable = true;
 
     @FXML
     public void initialize() {
         if (quiz.getCurrentQuestion() != null) {
-
             displayQuestion(quiz.getCurrentQuestion());
 
             limitTime = 3600;
@@ -198,7 +197,7 @@ public class QuizController {
 
     @FXML
     private void handleSubmit() {
-        if (confirmSubmit.isSelected()) {
+        if (confirmSubmit.isSelected() || limitTime <= 0) {
             List<String> selectedAnswers = getSelectedAnswer();
             quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
 
@@ -207,13 +206,16 @@ public class QuizController {
             if (timeline != null) {
                 timeline.stop();
             }
-            calScore(quiz.getAllQuestions().size());
+            calScore(quiz.getAllQuestions().size());   
 
-        }
-        if (closeAppEnable == true) {
-            submitButton.setText("Close app");
-            confirmSubmit.setDisable(true);
-            submitButton.setOnAction(event -> handleCloseApp());
+            if (closeAppEnable) {
+                submitButton.setText("Close app");
+                confirmSubmit.setDisable(true);
+                submitButton.setOnAction(event -> handleCloseApp());
+            }
+
+        }else{
+            resultText.setText("please confirm submission.");
         }
     }
 
@@ -250,7 +252,6 @@ public class QuizController {
                 displayResult();
             }
         });
-        closeAppEnable = true;
     }
 
     private void displayQuestionResult(Question question) {

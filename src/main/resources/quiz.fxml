@@ -22,7 +22,7 @@
                 <Label styleClass="infor" text="Username:Ngo Van Nam"></Label>
                 <Label styleClass="infor" text="Type account: basic"></Label>
             </VBox>
-            <Label fx:id="userPoint" text=""></Label>
+            <Text fx:id="userPoint" text="" wrappingWidth="300"></Text>
         </HBox>
     </VBox>
     <HBox styleClass="hbox" spacing="200" prefHeight="500" prefWidth="Infinity">
@@ -46,7 +46,6 @@
 
 
         <VBox spacing="10" fx:id="Timer" styleClass="countDowncLock">
-            <Text fx:id="Score_quiz" text="" wrappingWidth="300"/>
 
             <Label fx:id="countdownLabel" text="01:00:00"
                 style="-fx-font-size: 36px; -fx-text-fill: black;" />
