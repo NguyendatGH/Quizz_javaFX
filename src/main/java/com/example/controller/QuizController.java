@@ -55,7 +55,6 @@ public class QuizController {
 
     private Quiz quiz = new Quiz();
 
-    private List<Question> resultHistory = new ArrayList<>();
     private int resultIndex = 0;
 
     private int limitTime;
@@ -65,7 +64,9 @@ public class QuizController {
     @FXML
     public void initialize() {
         if (quiz.getCurrentQuestion() != null) {
+
             displayQuestion(quiz.getCurrentQuestion());
+
             limitTime = 3600;
 
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateClock()));
@@ -135,31 +136,30 @@ public class QuizController {
         return selectedAnswer;
     }
 
+    
+
     @FXML
     private void handleNext() {
         List<String> selectedAnswers = getSelectedAnswer();
-        if (!selectedAnswers.isEmpty()) {
-            List<String> correctAnswers = quiz.getCurrentQuestion().getAnswer();
 
-            boolean allCorrect = correctAnswers.containsAll(selectedAnswers);
+        quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
 
-            if (allCorrect) {
-                quiz.incrementCorrectChoiceCount();
-            }
+        List<String> correctAnswers = quiz.getCurrentQuestion().getAnswer();
 
-            quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
+        boolean allCorrect = correctAnswers.containsAll(selectedAnswers);
 
-            resultHistory.add(new Question(quiz.getCurrentQuestion()));
+        if (allCorrect) {
+            quiz.incrementCorrectChoiceCount();
+        }
 
+        if (quiz.hasMoreQuestions() || !quiz.getCurrentQuestion().getOptions().isEmpty()) {
             if (quiz.hasMoreQuestions()) {
                 quiz.nextQuestion();
                 displayQuestion(quiz.getCurrentQuestion());
                 prevQuest.setVisible(true);
             } else {
                 resultText.setText("Last question!, click submit to see your result");
-
             }
-            resultHistory.add(new Question(quiz.getCurrentQuestion()));
         } else {
             resultText.setText("Please select an answer.");
         }
@@ -168,6 +168,9 @@ public class QuizController {
 
     @FXML
     private void handlePrev() {
+        List<String> selectedAnswers = getSelectedAnswer();
+        quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
+
         if (quiz.hasPrevQuestion()) {
             quiz.previousQuest();
             displayQuestion(quiz.getCurrentQuestion());
@@ -182,19 +185,30 @@ public class QuizController {
         System.exit(0);
     }
 
+    private void calScore(int totalQuestion) {
+        int correctQuest = quiz.countCorrectChoice();
+        
+        double accuracyRate = (double) correctQuest / totalQuestion;
+    
+        double final_Score = accuracyRate * 10;
+    
+        userPoint.setText("Your score: " + String.valueOf(final_Score));       
+    }
+    
+
     @FXML
     private void handleSubmit() {
         if (confirmSubmit.isSelected()) {
             List<String> selectedAnswers = getSelectedAnswer();
             quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
-            resultHistory.add(new Question(quiz.getCurrentQuestion()));
-            resultIndex = 0;
+
             resultText.setText("");
             displayResult();
             if (timeline != null) {
                 timeline.stop();
             }
-            userPoint.setText("Score: "+quiz.countCorrectChoice());
+            calScore(quiz.getAllQuestions().size());
+
         }
         if (closeAppEnable == true) {
             submitButton.setText("Close app");
@@ -203,19 +217,28 @@ public class QuizController {
         }
     }
 
+    
+
     @FXML
     private void displayResult() {
-        if (resultHistory.isEmpty()) {
+
+        List<Question> questList = quiz.getAllQuestions();
+
+        if (questList.isEmpty()) {
             resultText.setText("no result");
             return;
         }
-        nextQuest.setText("next");
+
+        nextQuest.setText("Next");
+        prevQuest.setText("Previous");
         optionsBox.getChildren().clear();
-        Question currentQuest = resultHistory.get(resultIndex);
-        displayQuestionResult(currentQuest);
+
+        Question currQuest = questList.get(resultIndex);
+
+        displayQuestionResult(currQuest);
 
         nextQuest.setOnAction(event -> {
-            if (resultIndex < resultHistory.size() - 1) {
+            if (resultIndex < questList.size() - 1) {
                 resultIndex++;
                 displayResult();
             }
@@ -239,8 +262,8 @@ public class QuizController {
             questDecription.setText(question.getDescript());
             optionsBox.getChildren().clear();
 
-            List<String> userChoices = question.getUserchoice();
-            List<String> correctAns = question.getAnswer();
+            List<String> userChoices = question.getUserchoice() != null ? question.getUserchoice() : new ArrayList<>();
+            List<String> correctAns = question.getAnswer() != null ? question.getAnswer() : new ArrayList<>();
 
             for (String option : question.getOptions()) {
                 CheckBox checkBox = new CheckBox(option);

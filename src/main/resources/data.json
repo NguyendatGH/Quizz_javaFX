@@ -1,13 +1,11 @@
 [
   {
-    "id": "a0eeb8d3-7b5e-4b7d-b15c-4a9a50f6785b",
     "question": "Thủ đô của Ý là gì?",
     "options": ["Rome", "Venice", "Milan", "Naples"],
     "description": "Choose 1 option",
     "answer": ["Rome"]
   },
   {
-    "id": "b3e4ed8b-1e27-42f7-98b1-7a2a50161a1d",
     "question": "Ai là tác giả của 'Chiến tranh và Hòa bình'?",
     "options": [
       "Leo Tolstoy",
@@ -19,14 +17,12 @@
     "answer": ["Leo Tolstoy"]
   },
   {
-    "id": "c66f08db-f0e3-4b4e-a006-c90a8e9c71d2",
     "question": "Thành phố nào là thủ đô của Đức?",
     "options": ["Berlin", "Munich", "Frankfurt", "Hamburg"],
     "description": "Choose 1 option",
     "answer": ["Berlin"]
   },
   {
-    "id": "d92a4e7f-8d6f-4d48-bff2-27b2827e0f82",
     "question": "Ai là tác giả của 'Pride and Prejudice'?",
     "options": [
       "Jane Austen",
@@ -38,14 +34,12 @@
     "answer": ["Jane Austen"]
   },
   {
-    "id": "e1f3eb1a-2f7f-47b2-9db2-58d6c6d5941b",
     "question": "During a routine inspection, a technician discovered that software that was installed on a computer was secretly collecting data about websites that were visited by users of the computer. Which type of threat is affecting this computer?",
     "options": ["DoS attack​", "identity theft", "spyware", "zero-day attack"],
     "description": "Choose 1 option",
     "answer": ["spyware"]
   },
   {
-    "id": "f7b21c4a-9c23-4e1f-9312-6e6a5f6c8b98",
     "question": "Bình phương của số nào dưới đây = 4?",
     "options": ["-2", "0", "2", "3"],
     "description": "Choose 2 options",

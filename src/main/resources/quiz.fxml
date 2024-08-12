@@ -48,7 +48,6 @@
         <VBox spacing="10" fx:id="Timer" styleClass="countDowncLock">
             <Text fx:id="Score_quiz" text="" wrappingWidth="300"/>
 
-
             <Label fx:id="countdownLabel" text="01:00:00"
                 style="-fx-font-size: 36px; -fx-text-fill: black;" />
             <VBox spacing="4">

@@ -12,7 +12,6 @@ public class Quiz {
     private List<Question> questions = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int correctChoice = 0;
-    private List<Question> questionHistory = new ArrayList<>();
 
     public Quiz() {
         loadQuestions();
@@ -34,6 +33,15 @@ public class Quiz {
         }
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+
     public Question getCurrentQuestion() {
         if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.size()) {
             return questions.get(currentQuestionIndex);
@@ -47,19 +55,22 @@ public class Quiz {
 
     public void nextQuestion() {
         if (hasMoreQuestions()) {
-            questionHistory.add(questions.get(currentQuestionIndex));
+            questions.get(currentQuestionIndex);
             currentQuestionIndex++;
         }
     }
 
     public boolean hasPrevQuestion() {
-        return !questionHistory.isEmpty();
+        if(currentQuestionIndex <= 0){
+            return false;
+        }
+        return true;
     }
 
     public void previousQuest() {
         if (hasPrevQuestion()) {
-            questionHistory.remove(questionHistory.size() - 1);
             currentQuestionIndex = Math.max(0, currentQuestionIndex - 1);
+            questions.get(currentQuestionIndex);
         }
     }
 
@@ -71,8 +82,8 @@ public class Quiz {
         correctChoice++;
     }
 
-    public List<Question> getQuestionHistory() {
-        return questionHistory;
+    public List<Question> getAllQuestions() {
+        return new ArrayList<>(questions);
     }
 
 }
