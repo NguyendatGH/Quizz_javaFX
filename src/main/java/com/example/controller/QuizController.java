@@ -51,6 +51,9 @@ public class QuizController {
     @FXML
     private Text userPoint;
 
+    @FXML
+    private Label TESTCASE;
+
     private Timeline timeline;
 
     private Quiz quiz = new Quiz();
@@ -113,6 +116,7 @@ public class QuizController {
             for (String option : question.getOptions()) {
                 CheckBox checkBox = new CheckBox(option);
                 checkBox.setSelected(userChoices.contains(option));
+                checkBox.setOnAction(event -> handleCheckBoxAction(checkBox));
                 optionsBox.getChildren().add(checkBox);
             }
             resultText.setText("");
@@ -121,6 +125,12 @@ public class QuizController {
             optionsBox.getChildren().clear();
         }
     }
+
+    private void handleCheckBoxAction(CheckBox checkBox){
+        List<String> selectedAnswer = getSelectedAnswer();
+        quiz.getCurrentQuestion().setUserChoices(selectedAnswer);   
+    }
+
 
     private List<String> getSelectedAnswer() {
         List<String> selectedAnswer = new ArrayList<>();
@@ -138,7 +148,6 @@ public class QuizController {
     @FXML
     private void handleNext() {
         List<String> selectedAnswers = getSelectedAnswer();
-
         quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
 
         if (quiz.hasMoreQuestions() || !quiz.getCurrentQuestion().getOptions().isEmpty()) {
@@ -182,30 +191,14 @@ public class QuizController {
 
         String formattedScore = String.format("%.2f", final_Score);
 
-        userPoint.setText("Your score: " + formattedScore +"("+ correctQuest + "/" + quiz.getAllQuestions().size()+ ")");
+        userPoint.setText(
+                "Your score: " + formattedScore + "(" + correctQuest + "/" + quiz.getAllQuestions().size() + ")");
     }
 
     @FXML
     private void handleSubmit() {
         if (confirmSubmit.isSelected() || limitTime <= 0) {
-           
-            for (Question question : quiz.getAllQuestions()) {
-                List<String> userChoices = getSelectedAnswer();
-                question.setUserChoices(userChoices);
-            }
-    
-            
-            for (Question quest : quiz.getAllQuestions()) {
-                List<String> userChoices = quest.getUserchoice();
-                List<String> correctAnswers = quest.getAnswer();
-    
-                if (userChoices != null && correctAnswers != null) {
-                    boolean allCorrect = correctAnswers.size() == userChoices.size() && correctAnswers.containsAll(userChoices);
-                    if (allCorrect) {
-                       quiz.incrementCorrectChoiceCount();
-                    }
-                }
-            }
+            quiz.evaluateAnswers();
 
             resultText.setText("");
             displayResult();

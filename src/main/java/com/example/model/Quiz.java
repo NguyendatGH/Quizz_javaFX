@@ -78,10 +78,23 @@ public class Quiz {
         return correctQuest;
     }
 
-    public void setCountCorrectQuest(int correctQuest){
-        this.correctQuest = correctQuest;
+    public void setCountCorrectQuest(int c){
+        this.correctQuest = c;
     }
+    public void evaluateAnswers() {
+        correctQuest = 0; 
+        for (Question question : questions) {
+            List<String> userChoices = question.getUserchoice();
+            List<String> correctAnswers = question.getAnswer();
 
+            if (userChoices != null && correctAnswers != null) {
+                boolean allCorrect = correctAnswers.size() == userChoices.size() && correctAnswers.containsAll(userChoices);
+                if (allCorrect) {
+                    incrementCorrectChoiceCount();
+                }
+            }
+        }
+    }
 
     public void incrementCorrectChoiceCount() {
         correctQuest++;

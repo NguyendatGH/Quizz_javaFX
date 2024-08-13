@@ -30,12 +30,7 @@
             <Text fx:id="questionText" text="Question" wrappingWidth="1200" />
             <Text fx:id="questDecription" text="choose 1 option" wrappingWidth="500" />
             <VBox spacing="10" fx:id="optionsBox">
-                <children>
-                    <CheckBox text="" />
-                    <CheckBox text="" />
-                    <CheckBox text="" />
-                    <CheckBox text="" />
-                </children>
+              
             </VBox>
             <HBox spacing="10" fx:id="BtnArea">
                 <Button fx:id="prevQuest" text="prev" onAction="#handlePrev"></Button>
@@ -55,4 +50,5 @@
             </VBox>
         </VBox>
     </HBox>
+
 </VBox>
