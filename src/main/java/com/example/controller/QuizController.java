@@ -19,10 +19,10 @@ import javafx.util.Duration;
 public class QuizController {
 
     @FXML
-    private Text questionText;
+    private Text quest_content;
 
     @FXML
-    private Text questDecription;
+    private Text option_toggle;
 
     @FXML
     private VBox optionsBox;
@@ -76,8 +76,8 @@ public class QuizController {
             timeline.play();
             System.out.println("Timeline started.");
         } else {
-            questionText.setText("No questions available!");
-            questDecription.setText("");
+            quest_content.setText("No questions available!");
+            option_toggle.setText("");
             optionsBox.getChildren().clear();
         }
     }
@@ -104,8 +104,8 @@ public class QuizController {
 
     private void displayQuestion(Question question) {
         if (question != null) {
-            questionText.setText(question.getQuestion());
-            questDecription.setText(question.getDescript());
+            quest_content.setText(question.getQuestion());
+            option_toggle.setText(question.getDescript());
             optionsBox.getChildren().clear();
 
             List<String> userChoices = question.getUserchoice();
@@ -121,7 +121,7 @@ public class QuizController {
             }
             resultText.setText("");
         } else {
-            questionText.setText("Quiz completed!");
+            quest_content.setText("Quiz completed!");
             optionsBox.getChildren().clear();
         }
     }
@@ -256,8 +256,8 @@ public class QuizController {
             prevQuest.setVisible(true);
             nextQuest.setVisible(true);
 
-            questionText.setText(question.getQuestion());
-            questDecription.setText(question.getDescript());
+            quest_content.setText(question.getQuestion());
+            option_toggle.setText(question.getDescript());
             optionsBox.getChildren().clear();
 
             List<String> userChoices = question.getUserchoice() != null ? question.getUserchoice() : new ArrayList<>();
@@ -272,7 +272,7 @@ public class QuizController {
 
             resultText.setText("Correct ans: " + String.join(", ", correctAns));
         } else {
-            questionText.setText("No question available");
+            quest_content.setText("No question available");
         }
     }
 }

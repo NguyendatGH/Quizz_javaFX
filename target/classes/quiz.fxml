@@ -12,29 +12,30 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="com.example.controller.QuizController" prefHeight="Infinity" prefWidth="Infinity"
     stylesheets="style.css">
-    <VBox styleClass="header_QuizApp" prefWidth="Infinity" prefHeight="150" spacing="10">
-        <HBox spacing="30" styleClass="wrapper_horizontal">
-            <VBox spacing="10">
-                <Label styleClass="infor" text="Subjec: SSG104"></Label>
-                <Label styleClass="infor" text="Date: 11/1/2001"></Label>
-            </VBox>
-            <VBox spacing="10">
-                <Label styleClass="infor" text="Username:Ngo Van Nam"></Label>
-                <Label styleClass="infor" text="Type account: basic"></Label>
-            </VBox>
-            <Text fx:id="userPoint" text="" wrappingWidth="300"></Text>
-        </HBox>
+
+
+    <VBox styleClass="LabelHeader" spacing="24">
+        <VBox spacing="12" styleClass="Content_header">
+                <Label styleClass="wrapItem subject" text="Subjec: SSG104"
+                    style="-fx-font-size: 14px"></Label>
+                <Label styleClass="wrapItem name" text="Username: Nguyen Van A"
+                    style="-fx-font-size: 14px"></Label>
+        </VBox>
+        <Text fx:id="userPoint" text="" wrappingWidth="300" style="-fx-font-size: 24px"></Text>
     </VBox>
-    <HBox styleClass="hbox" spacing="200" prefHeight="500" prefWidth="Infinity">
+
+
+    <HBox fx:id="ContentWrapper" spacing="200" prefHeight="500" prefWidth="Infinity">
         <VBox spacing="10" styleClass="QuestionRender">
-            <Text fx:id="questionText" text="Question" wrappingWidth="1200" />
-            <Text fx:id="questDecription" text="choose 1 option" wrappingWidth="500" />
+            <Label text="Q1" styleClass="Index"></Label>
+
+            <Text fx:id="quest_content" text="Question" wrappingWidth="1200" />
+            <Text fx:id="option_toggle" text="choose 1 option" wrappingWidth="500" />
             <VBox spacing="10" fx:id="optionsBox">
-              
             </VBox>
             <HBox spacing="10" fx:id="BtnArea">
-                <Button fx:id="prevQuest" text="prev" onAction="#handlePrev"></Button>
-                <Button fx:id="nextQuest" text="next" onAction="#handleNext"></Button>
+                <Button fx:id="prevQuest"  text="prev" onAction="#handlePrev"></Button>
+                <Button fx:id="nextQuest"  text="next" onAction="#handleNext"></Button>
             </HBox>
             <Text fx:id="resultText" text="" />
         </VBox>
