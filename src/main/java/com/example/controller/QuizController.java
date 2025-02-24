@@ -1,17 +1,15 @@
 package com.example.controller;
 
-import com.example.model.Question;
-import com.example.model.Quiz;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.model.Question;
+import com.example.model.Quiz;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -19,260 +17,148 @@ import javafx.util.Duration;
 public class QuizController {
 
     @FXML
-    private Text quest_content;
+    private Label quest_content;
 
     @FXML
-    private Text option_toggle;
+    private Button opt1Button;
 
     @FXML
-    private VBox optionsBox;
+    private Button opt2Button;
+
+    @FXML
+    private Button opt3Button;
+
+    @FXML
+    private Button opt4Button;
 
     @FXML
     private Text resultText;
 
     @FXML
-    private Button nextQuest;
-
-    @FXML
-    private Button prevQuest;
-
-    @FXML
-    private Label countdownLabel;
-
-    @FXML
-    private Button closeApp;
-
-    @FXML
-    private CheckBox confirmSubmit;
-
-    @FXML
-    private Button submitButton;
+    private Button exitButton;
 
     @FXML
     private Text userPoint;
 
     @FXML
-    private Label TESTCASE;
-
-    private Timeline timeline;
+    private Label resultBanner;
 
     private Quiz quiz = new Quiz();
-
-    private int resultIndex = 0;
-
-    private int limitTime;
-
-    private boolean closeAppEnable = true;
 
     @FXML
     public void initialize() {
         if (quiz.getCurrentQuestion() != null) {
             displayQuestion(quiz.getCurrentQuestion());
-
-            limitTime = 3600;
-
-            timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateClock()));
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.play();
-            System.out.println("Timeline started.");
         } else {
             quest_content.setText("No questions available!");
-            option_toggle.setText("");
-            optionsBox.getChildren().clear();
+            disableOptions();
         }
-    }
-
-    private void updateClock() {
-        try {
-
-            if (limitTime <= 0) {
-                countdownLabel.setText("00:00:00");
-                timeline.stop();
-                handleSubmit();
-            } else {
-                limitTime = limitTime - 1;
-                int hours = limitTime / 3600;
-                int min = (limitTime % 3600) / 60;
-                int sec = limitTime % 60;
-
-                countdownLabel.setText(String.format("%02d:%02d:%02d", hours, min, sec));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        resultBanner.setVisible(false);
+        exitButton.setVisible(false); 
     }
 
     private void displayQuestion(Question question) {
         if (question != null) {
             quest_content.setText(question.getQuestion());
-            option_toggle.setText(question.getDescript());
-            optionsBox.getChildren().clear();
-
-            List<String> userChoices = question.getUserchoice();
-            if (userChoices == null) {
-                userChoices = new ArrayList<>();
+            List<String> options = question.getOptions();
+            if (options.size() >= 4) {
+                opt1Button.setText(options.get(0));
+                opt2Button.setText(options.get(1));
+                opt3Button.setText(options.get(2));
+                opt4Button.setText(options.get(3));
             }
-
-            for (String option : question.getOptions()) {
-                CheckBox checkBox = new CheckBox(option);
-                checkBox.setSelected(userChoices.contains(option));
-                checkBox.setOnAction(event -> handleCheckBoxAction(checkBox));
-                optionsBox.getChildren().add(checkBox);
-            }
+            enableOptions();
             resultText.setText("");
+            resultBanner.setVisible(false);
+            exitButton.setVisible(false); 
+
+            opt1Button.setStyle("-fx-background-color: #7B68EE;");
+            opt2Button.setStyle("-fx-background-color: #7B68EE;");
+            opt3Button.setStyle("-fx-background-color: #7B68EE;");
+            opt4Button.setStyle("-fx-background-color: #7B68EE;");
+
+            // Gán sự kiện cho các button
+            opt1Button.setOnAction(event -> handleOptionButtonAction(options.get(0)));
+            opt2Button.setOnAction(event -> handleOptionButtonAction(options.get(1)));
+            opt3Button.setOnAction(event -> handleOptionButtonAction(options.get(2)));
+            opt4Button.setOnAction(event -> handleOptionButtonAction(options.get(3)));
         } else {
-            quest_content.setText("Quiz completed!");
-            optionsBox.getChildren().clear();
+            showFinalResult();
         }
     }
 
-    private void handleCheckBoxAction(CheckBox checkBox){
-        List<String> selectedAnswer = getSelectedAnswer();
-        quiz.getCurrentQuestion().setUserChoices(selectedAnswer);   
-    }
-
-
-    private List<String> getSelectedAnswer() {
+    private void handleOptionButtonAction(String option) {
         List<String> selectedAnswer = new ArrayList<>();
-        for (javafx.scene.Node node : optionsBox.getChildren()) {
-            if (node instanceof CheckBox) {
-                CheckBox checkBox = (CheckBox) node;
-                if (checkBox.isSelected()) {
-                    selectedAnswer.add(checkBox.getText());
-                }
-            }
-        }
-        return selectedAnswer;
-    }
+        selectedAnswer.add(option);
+        Question currentQuestion = quiz.getCurrentQuestion();
+        currentQuestion.setUserChoices(selectedAnswer);
 
-    @FXML
-    private void handleNext() {
-        List<String> selectedAnswers = getSelectedAnswer();
-        quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
 
-        if (quiz.hasMoreQuestions() || !quiz.getCurrentQuestion().getOptions().isEmpty()) {
+        List<String> correctAns = currentQuestion.getAnswer();
+        boolean isCorrect = correctAns.contains(option);
+
+    
+        resultBanner.setText(isCorrect ? "Correct!" : "Wrong!");
+        resultBanner.setStyle(isCorrect ? "-fx-background-color:rgb(0, 255, 0); -fx-text-fill: black;" : "-fx-background-color: #ff6347; -fx-text-fill: white;");
+        resultBanner.setVisible(true);
+
+
+        opt1Button.setStyle(option.equals(opt1Button.getText()) ? (isCorrect ? "-fx-background-color:rgb(31, 206, 31);" : "-fx-background-color:rgb(180, 61, 40);") : "-fx-background-color:rgba(41, 12, 204, 0.76);");
+        opt2Button.setStyle(option.equals(opt2Button.getText()) ? (isCorrect ? "-fx-background-color: rgb(31, 206, 31);" : "-fx-background-color: rgb(180, 61, 40);;") : "-fx-background-color: rgba(41, 12, 204, 0.76);");
+        opt3Button.setStyle(option.equals(opt3Button.getText()) ? (isCorrect ? "-fx-background-color: rgb(31, 206, 31);" : "-fx-background-color: rgb(180, 61, 40);;") : "-fx-background-color: rgba(41, 12, 204, 0.76);");
+        opt4Button.setStyle(option.equals(opt4Button.getText()) ? (isCorrect ? "-fx-background-color: rgb(31, 206, 31);" : "-fx-background-color: rgb(180, 61, 40);;") : "-fx-background-color: rgba(41, 12, 204, 0.76);");
+
+        disableOptions();
+
+        Timeline delay = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            resultBanner.setVisible(false);
             if (quiz.hasMoreQuestions()) {
                 quiz.nextQuestion();
                 displayQuestion(quiz.getCurrentQuestion());
-                prevQuest.setVisible(true);
             } else {
-                resultText.setText("Last question!, click submit to see your result");
+                showFinalResult();
             }
-        } else {
-            resultText.setText("Please select an answer.");
-        }
-
+        }));
+        delay.setCycleCount(1);
+        delay.play();
     }
 
     @FXML
-    private void handlePrev() {
-        List<String> selectedAnswers = getSelectedAnswer();
-        quiz.getCurrentQuestion().setUserChoices(selectedAnswers);
-
-        if (quiz.hasPrevQuestion()) {
-            quiz.previousQuest();
-            displayQuestion(quiz.getCurrentQuestion());
-        } else {
-            resultText.setText("No previous question.");
-        }
-    }
-
-    @FXML
-    private void handleCloseApp() {
+    private void handleExit() {
         System.gc();
         System.exit(0);
     }
 
-    private void calScore(int totalQuestion) {
+    private void showFinalResult() {
+        quest_content.setText("Quiz Completed!");
+        disableOptions();
+        opt1Button.setVisible(false); 
+        opt2Button.setVisible(false);
+        opt3Button.setVisible(false);
+        opt4Button.setVisible(false);
+        quiz.evaluateAnswers(); 
+        int totalQuestion = quiz.getAllQuestions().size();
         int correctQuest = quiz.countCorrectQuest();
-
         double accuracyRate = (double) correctQuest / totalQuestion;
-        double final_Score = accuracyRate * 10;
-
-        String formattedScore = String.format("%.2f", final_Score);
-
-        userPoint.setText(
-                "Your score: " + formattedScore + "(" + correctQuest + "/" + quiz.getAllQuestions().size() + ")");
+        double finalScore = accuracyRate * 10;
+        String formattedScore = String.format("%.2f", finalScore);
+        userPoint.setText("Your score: " + formattedScore + " (" + correctQuest + "/" + totalQuestion + ")");
+        resultText.setText("");
+        resultBanner.setVisible(false);
+        exitButton.setVisible(true); 
     }
 
-    @FXML
-    private void handleSubmit() {
-        if (confirmSubmit.isSelected() || limitTime <= 0) {
-            quiz.evaluateAnswers();
-
-            resultText.setText("");
-            displayResult();
-            if (timeline != null) {
-                timeline.stop();
-            }
-            calScore(quiz.getAllQuestions().size());
-
-            if (closeAppEnable) {
-                submitButton.setText("Close app");
-                confirmSubmit.setDisable(true);
-                submitButton.setOnAction(event -> handleCloseApp());
-            }
-
-        } else {
-            resultText.setText("please confirm submission.");
-        }
+    private void disableOptions() {
+        opt1Button.setDisable(true);
+        opt2Button.setDisable(true);
+        opt3Button.setDisable(true);
+        opt4Button.setDisable(true);
     }
 
-    @FXML
-    private void displayResult() {
-
-        List<Question> questList = quiz.getAllQuestions();
-
-        if (questList.isEmpty()) {
-            resultText.setText("no result");
-            return;
-        }
-
-        nextQuest.setText("Next");
-        prevQuest.setText("Previous");
-        optionsBox.getChildren().clear();
-
-        Question currQuest = questList.get(resultIndex);
-
-        displayQuestionResult(currQuest);
-
-        nextQuest.setOnAction(event -> {
-            if (resultIndex < questList.size() - 1) {
-                resultIndex++;
-                displayResult();
-            }
-        });
-
-        prevQuest.setOnAction(event -> {
-            if (resultIndex > 0) {
-                resultIndex--;
-                displayResult();
-            }
-        });
-    }
-
-    private void displayQuestionResult(Question question) {
-        if (question != null) {
-            prevQuest.setVisible(true);
-            nextQuest.setVisible(true);
-
-            quest_content.setText(question.getQuestion());
-            option_toggle.setText(question.getDescript());
-            optionsBox.getChildren().clear();
-
-            List<String> userChoices = question.getUserchoice() != null ? question.getUserchoice() : new ArrayList<>();
-            List<String> correctAns = question.getAnswer() != null ? question.getAnswer() : new ArrayList<>();
-
-            for (String option : question.getOptions()) {
-                CheckBox checkBox = new CheckBox(option);
-                checkBox.setSelected(userChoices.contains(option));
-                checkBox.setDisable(true);
-                optionsBox.getChildren().add(checkBox);
-            }
-
-            resultText.setText("Correct ans: " + String.join(", ", correctAns));
-        } else {
-            quest_content.setText("No question available");
-        }
+    private void enableOptions() {
+        opt1Button.setDisable(false);
+        opt2Button.setDisable(false);
+        opt3Button.setDisable(false);
+        opt4Button.setDisable(false);
     }
 }
