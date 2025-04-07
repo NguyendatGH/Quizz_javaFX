@@ -1,48 +1,241 @@
 [
   {
-    "question": "Thủ đô của Ý là gì?",
-    "options": ["Rome", "Venice", "Milan", "Naples"],
-    "description": "Choose 1 option",
-    "answer": ["Rome"]
-  },
-  {
-    "question": "Ai là tác giả của 'Chiến tranh và Hòa bình'?",
+    "question": "Which of the following list does present JSP implicit object?",
     "options": [
-      "Leo Tolstoy",
-      "Fyodor Dostoevsky",
-      "Ivan Turgenev",
-      "Anton Chekhov"
+      "pageContext, config, application, exception",
+      "pageContext, config, context, exception",
+      "pageContext, servlet, application, parameter",
+      "None of the others"
     ],
     "description": "Choose 1 option",
-    "answer": ["Leo Tolstoy"]
+    "answer": ["pageContext, config, application, exception"]
   },
   {
-    "question": "Thành phố nào là thủ đô của Đức?",
-    "options": ["Berlin", "Munich", "Frankfurt", "Hamburg"],
-    "description": "Choose 1 option",
-    "answer": ["Berlin"]
-  },
-  {
-    "question": "Ai là tác giả của 'Pride and Prejudice'?",
+    "question": "Which methods are used for session tracking of Java web application?",
     "options": [
-      "Jane Austen",
-      "Emily Bronte",
-      "Mary Shelley",
-      "Charlotte Bronte"
+      "Using HttpSession",
+      "Using Hidden Form Fields",
+      "Using Cookies",
+      "Using URL rewrite technic"
+    ],
+    "description": "Choose multiple options",
+    "answer": ["Using HttpSession", "Using Cookies", "Using URL rewrite technic"]
+  },
+  {
+    "question": "Which following sentence is correct about Filter Life Cycle?",
+    "options": [
+      "The Filter is trigger before invoke servlet method",
+      "The Filter is trigger before request come to servlet",
+      "The Filter is trigger before Context Initialization Parameter is created",
+      "None of the others"
+    ],
+    "description": "Choose multiple options",
+    "answer": [
+      "The Filter is trigger before invoke servlet method",
+      "The Filter is trigger before request come to servlet"
+    ]
+  },
+  {
+    "question": "How does DBMS deal with concurrent multi-user?",
+    "options": [
+      "Connection pool is provided by DBMS server and application server",
+      "Using 1 connection sharing by multi user",
+      "Eliminate connection leaks in database applications",
+      "Always manage database tasks with transaction"
     ],
     "description": "Choose 1 option",
-    "answer": ["Jane Austen"]
+    "answer": ["Connection pool is provided by DBMS server and application server"]
   },
   {
-    "question": "During a routine inspection, a technician discovered that software that was installed on a computer was secretly collecting data about websites that were visited by users of the computer. Which type of threat is affecting this computer?",
-    "options": ["DoS attack​", "identity theft", "spyware", "zero-day attack"],
+    "question": "Which of the following statements about the JavaBean is true?",
+    "options": [
+      "The public get/set methods give access to the properties of the bean",
+      "JavaBean component property must only be write-only format",
+      "It is possible initialise the JavaBeans with arguments using jsp:useBean",
+      "Java bean object can initialized with any construtor in servlet or sriptlet"
+    ],
+    "description": "Choose multiple options",
+    "answer": [
+      "The public get/set methods give access to the properties of the bean",
+      "Java bean object can initialized with any construtor in servlet or sriptlet"
+    ]
+  },
+  {
+    "question": "Which structure of Request Line in Request Message is?",
+    "options": [
+      "[HTTP Method] [Requested Resource forming URI] [Protocol Version]",
+      "[HTTP Method] [Protocol Version] [Requested Resource forming URI]",
+      "[Requested Resource forming URI] [HTTP Method] [Protocol Version]",
+      "None of the others"
+    ],
     "description": "Choose 1 option",
-    "answer": ["spyware"]
+    "answer": ["[HTTP Method] [Requested Resource forming URI] [Protocol Version]"]
   },
   {
-    "question": "Bình phương của số nào dưới đây = 4?",
-    "options": ["-2", "0", "2", "3"],
-    "description": "Choose 2 options",
-    "answer": ["-2", "2"]
+    "question": "Where can Request Parameter be put in Request Message?",
+    "options": [
+      "Request Line And Message Body",
+      "Only in Message Body",
+      "Header Information and Message Body",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["Only in Message Body"]
+  },
+  {
+    "question": "How does container initialize Servlet Object at deploy time?",
+    "options": [
+      "The servlet must be declared into web deployment descriptor with servlet tag",
+      "The servlet must be declared into context deployment descriptor with servlet tag",
+      "The servlet must be declared into web deployment descriptor with servlet-mapping tag",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["The servlet must be declared into web deployment descriptor with servlet tag"]
+  },
+  {
+    "question": "Which feature is the parameter of Request, Context, and Config same?",
+    "options": [
+      "read-only",
+      "all are declared in web deployment descriptor",
+      "the data type is Object",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["read-only"]
+  },
+  {
+    "question": "Which following sentence does present Implicit Objects’ object?",
+    "options": [
+      "pageContext, config, application, exception",
+      "pageContext, config, context, exception",
+      "pageContext, servlet, application, parameter",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["pageContext, config, application, exception"]
+  },
+  {
+    "question": "Which component can be used call method and output to response object in JSP code?",
+    "options": [
+      "expression",
+      "scriplets",
+      "declaration",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["expression"]
+  },
+  {
+    "question": "The test.jsp contains the following code.\n<%!\n   String s = \"String 1\";\n   public void check() {\n      System.out.println(\"this is check function\" + s);\n   }\n   public void checkJSP() {\n      System.out.println(\"this is check JSP function\");\n   }\n%>\n<%\n   check();\n   checkJSP();\n   \n%>\nWhat is the output?",
+    "options": [
+      "The program gives a syntax error because of the statement \"public void check() {\"",
+      "The program gives a syntax error because of the statement \"public void checkJSP() {\"",
+      "The server display \"this is check function\" and \"this is check JSP function\"",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["None of the others"]
+  },
+  {
+    "question": "What is the output from the following JSP?\n<%! String s = \"final exam\"; %>\nEL: ${s}\nScriptlet: <% s %>\n<% Integer test = new Integer(5);\nrequest.setAttribute(\"num\", test); %>\nEL: ${num}\nWhat is the output?",
+    "options": [
+      "EL: final Scriptlet: final exam EL: 5",
+      "EL: Scriptlet: EL: 5",
+      "EL: Scriptlet: final exam EL: 5",
+      "None of the others"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["None of the others"]
+  },
+  {
+    "question": "What is output to the web page on the second access to the same instance of the following JSP?\n<html>\n<body>\n<%! int x = 1; %>\n<%!\n public void jspInit() {\n System.out.println(\"This is init\");\n}\n%>\n<%= x++; %>\n<% System.out.println(x); %>\n<% jspInit(); %>\n</body>\n</html>\nWhat is the output?",
+    "options": [
+      "2",
+      "None of the others",
+      "The page can not be translated",
+      "0",
+      "1"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["The page can not be translated"]
+  },
+  {
+    "question": "The Servlet.java contains the following code.\nprotected void processRequest(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n    response.setContentType(\"text/html;charset=UTF-8\");\n            /* TODO output your page here. You may use following sample code. */\n            out.println(\"<!DOCTYPE html>\");\n            out.println(\"<html>\");\n            out.println(\"<head>\");\n            out.println(\"<title>Servlet HelloServlet</title>\");            \n            out.println(\"</head>\");\n            out.println(\"<body>\");\n            String f1 = (String)request.getAttribute(\"f1\");\n            out.println(f1 + \"<br/>\");\n            out.println(\"</body>\");\n            out.println(\"</html>\");\n            out.close();\n    }\nThe Filter.java contains the following code.\npublic void doFilter(ServletRequest request, ServletResponse response,\n            FilterChain chain)\n            throws IOException, ServletException {\n    request.setAttribute(\"f1\", \"Request Filter 1\");\n    chain.doFilter(request, response);\n    PrintWriter out = response.getWriter();\n    out.println(\" Response Filter 1 \");\n    out.close();\n}\nWhat is the client output?",
+    "options": [
+      "Request Filter 1",
+      "Request Filter 1 Response Filter 1",
+      "Response Filter 1 Request Filter 1",
+      "None of the others",
+      "Response Filter 1"
+    ],
+    "description": "Choose 1 option",
+    "answer": ["Request Filter 1"]
+  },
+  {
+    "question": "Before you can use JSTL tags within an application, you must make the jstl-impl.jar and jstl-api.jar files available to the application.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
+  },
+  {
+    "question": "Before you can use JSTL tags within a JSP, you must code a import directive that identifies the JSTL library and its prefix.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["false"]
+  },
+  {
+    "question": "If necessary, you can nest one JSTL if tag within another.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
+  },
+  {
+    "question": "You can use the test attribute to specify the Boolean condition for the if statement in JSTL.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
+  },
+  {
+    "question": "You can use the JSTL if tag to perform conditional processing that's similar to an if statement in Java.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
+  },
+  {
+    "question": "You cannot nest one JSTL choose tag within another.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["false"]
+  },
+  {
+    "question": "You can use the test attribute to specify the Boolean condition for a when tag in JSTL.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
+  },
+  {
+    "question": "You can use the JSTL choose tag to perform conditional processing that's similar to an if statement only in Java.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["false"]
+  },
+  {
+    "question": "You can use the JSTL for tag to loop through most types of collections, including regular arrays.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["false"]
+  },
+  {
+    "question": "You cannot use the JSTL forEach tag to loop through most types of collections, including regular arrays.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["false"]
+  },
+  {
+    "question": "You can use the JSTL forTokens tag to loop through items in a delimited string.",
+    "options": ["true", "false"],
+    "description": "Choose 1 option",
+    "answer": ["true"]
   }
 ]
