@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" prefHeight="498.0" prefWidth="829.0" spacing="20"
    style="-fx-background-color: #121632;"
-   xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+   xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1"
    fx:controller="com.example.controller.QuizController">
    <children>
       <VBox VBox.vgrow="ALWAYS" />

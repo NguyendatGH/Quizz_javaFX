@@ -77,7 +77,6 @@ public class QuizController {
             opt3Button.setStyle("-fx-background-color: #7B68EE;");
             opt4Button.setStyle("-fx-background-color: #7B68EE;");
 
-            // Gán sự kiện cho các button
             opt1Button.setOnAction(event -> handleOptionButtonAction(options.get(0)));
             opt2Button.setOnAction(event -> handleOptionButtonAction(options.get(1)));
             opt3Button.setOnAction(event -> handleOptionButtonAction(options.get(2)));
