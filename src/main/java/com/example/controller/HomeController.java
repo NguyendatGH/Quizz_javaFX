@@ -59,32 +59,58 @@ public class HomeController {
     public void initialize() {
         exitButton.setOnAction(event -> handleExit());
 
-        // Add handler for newQuizButton
         newQuizButton.setOnAction(event -> handleNewQuiz());
+        historyButton.setOnAction(event -> handleHistory());
     }
 
-    /**
-     * Handles the "New Quiz" button click event Loads and displays the quiz
-     * main screen while maintaining fullscreen state
-     */
+ 
     @FXML
     private void handleNewQuiz() {
         try {
-            // Load the quiz main screen
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("quizMain.fxml"));
-            Parent quizView = loader.load();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("quizSetup.fxml"));
+            Parent quizSetupView = loader.load();
+
+
+            Stage stage = (Stage) newQuizButton.getScene().getWindow();
+
+            boolean wasFullScreen = stage.isFullScreen();
+
+
+            Scene quizSetupScene = new Scene(quizSetupView);
+
+            stage.setScene(quizSetupScene);
+            if (wasFullScreen) {
+                stage.setFullScreen(true);
+                stage.setFullScreenExitHint("");
+            }
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading quiz setup screen: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleHistory() {
+        try {
+            // Load the quiz history screen
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("quizHistory.fxml"));
+            Parent historyView = loader.load();
 
             // Get the stage
-            Stage stage = (Stage) newQuizButton.getScene().getWindow();
+            Stage stage = (Stage) historyButton.getScene().getWindow();
 
             // Preserve fullscreen state
             boolean wasFullScreen = stage.isFullScreen();
 
-            // Create new scene with quiz view
-            Scene quizScene = new Scene(quizView);
+            // Create new scene with history view
+            Scene historyScene = new Scene(historyView);
 
             // Set the new scene
-            stage.setScene(quizScene);
+            stage.setScene(historyScene);
 
             // Reapply fullscreen state
             if (wasFullScreen) {
@@ -96,7 +122,7 @@ public class HomeController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error loading quiz screen: " + e.getMessage());
+            System.err.println("Error loading history screen: " + e.getMessage());
         }
     }
 
@@ -115,7 +141,7 @@ public class HomeController {
 
         // Fullscreen listener
         stage.fullScreenProperty().addListener((obs, oldVal, newVal) -> {
-            System.out.println("Fullscreen changed to: " + newVal);
+            // System.out.println("Fullscreen changed to: " + newVal);
             if (!isAdjusting) {
                 adjustElementSizes();
             }
@@ -139,7 +165,7 @@ public class HomeController {
 
             // Log window size
             if (stage.getWidth() > 0 && stage.getHeight() > 0) {
-                System.out.println("Window size: " + stage.getWidth() + "x" + stage.getHeight());
+                // System.out.println("Window size: " + stage.getWidth() + "x" + stage.getHeight());
                 System.out.println("Fullscreen: " + stage.isFullScreen());
             } else {
                 return; // Skip if dimensions are invalid
@@ -171,34 +197,32 @@ public class HomeController {
 
     // New method with controlled scaling
     private void applyControlledScale(double scaleFactor) {
-        System.out.println("Applying scale factor: " + scaleFactor);
+        // System.out.println("Applying scale factor: " + scaleFactor);
 
-        // Title - moderate scaling
+    
         if (titleLabel != null) {
             double titleSize = originalTitleSize * Math.min(1.8, scaleFactor);
             titleLabel.setStyle("-fx-font-size: " + titleSize + "px; -fx-text-fill: white;");
         }
 
-        // Subtitle - minimal scaling
+ 
         if (subtitleLabel != null) {
             double subtitleSize = originalSubtitleSize * Math.min(1.5, scaleFactor);
             subtitleLabel.setStyle("-fx-font-size: " + subtitleSize + "px; -fx-text-fill: white;");
         }
 
-        // Footer - minimal scaling
         if (footerLabel != null) {
             double footerSize = originalFooterSize * Math.min(1.5, scaleFactor);
             footerLabel.setStyle("-fx-font-size: " + footerSize + "px; -fx-text-fill: white;");
         }
 
-        // Hero image - moderate scaling
+
         if (heroImage != null) {
             double imageScale = Math.min(1.8, scaleFactor);
             heroImage.setFitWidth(originalImageWidth * imageScale);
             heroImage.setFitHeight(originalImageHeight * imageScale);
         }
 
-        // Buttons - controlled scaling
         double buttonWidth = originalButtonWidth * Math.min(1.5, scaleFactor);
         double buttonHeight = originalButtonHeight * Math.min(1.3, scaleFactor);
         double buttonFontSize = 14 * Math.min(1.4, scaleFactor);

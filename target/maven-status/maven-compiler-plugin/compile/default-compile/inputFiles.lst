@@ -1,5 +1,8 @@
 /home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/controller/QuizResultController.java
+/home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/controller/QuizHistoryController.java
 /home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/Main.java
+/home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/model/QuizHistory.java
+/home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/controller/QuizSetupController.java
 /home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/controller/QuizReviewController.java
 /home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/model/Quiz.java
 /home/rio/Documents/CODE/Java/gui_java/Quizz_javaFX/src/main/java/com/example/model/Question.java

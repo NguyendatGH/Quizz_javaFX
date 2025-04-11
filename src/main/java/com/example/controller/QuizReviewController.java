@@ -51,7 +51,6 @@ public class QuizReviewController {
     private List<StackPane> questionCircles = new ArrayList<>();
     private final int CIRCLES_PER_ROW = 6; // Number of circles per row
     
-    // Color constants - matching the colors in the image
     private final String CORRECT_COLOR = "#1FCE1F"; // Green for correct answers
     private final String INCORRECT_COLOR = "#B43D28"; // Red for incorrect answers
     private final String NEUTRAL_COLOR = "#666666"; // Gray for unanswered
@@ -192,7 +191,6 @@ public class QuizReviewController {
                 
                 optionBox.setStyle(optionStyle);
                 
-                // Option label with letter prefix
                 Label optionLabel = new Label(optionLetter + "     " + option);
                 optionLabel.setWrapText(true);
                 optionLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px;");
@@ -205,8 +203,8 @@ public class QuizReviewController {
             }
             
             // Add explanation if available
-            if (question.getDescript() != null && !question.getDescript().isEmpty()) {
-                Label explanationLabel = new Label("Explanation: " + question.getDescript());
+            if (question.getDescription() != null && !question.getDescription().isEmpty()) {
+                Label explanationLabel = new Label("Explanation: " + question.getDescription());
                 explanationLabel.setWrapText(true);
                 explanationLabel.setStyle("-fx-text-fill: #B15BFF; -fx-font-size: 14px; -fx-padding: 10px 0 0 0;");
                 optionsContainer.getChildren().add(explanationLabel);

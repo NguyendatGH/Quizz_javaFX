@@ -144,6 +144,7 @@ public class QuizResultController {
         try {
           
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("quizReview.fxml"));
+            System.out.println("go to quizReview");
             Parent reviewView = loader.load();
             
             // Pass quiz data to review controller

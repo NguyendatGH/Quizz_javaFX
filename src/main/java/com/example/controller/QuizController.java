@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.model.Question;
@@ -73,17 +74,45 @@ public class QuizController {
 
     @FXML
     public void initialize() {
-        // Inicializar array de botões
         optionButtons = new Button[] {opt1Button, opt2Button, opt3Button, opt4Button};
-        
-        // Limpe o conteúdo atual do VBox progressIndicator
+    }
+
+    public void setQuestions(List<Question> allQuestions, int numQuestions) {
+        // Reset the quiz to ensure it doesn't retain questions from previous sessions
+        quiz = new Quiz();
+        System.out.println("After quiz reset, questions count: " + quiz.getAllQuestions().size()); // Should be 0
+    
+        // Validate inputs
+        if (allQuestions == null || allQuestions.isEmpty()) {
+            System.out.println("Error: allQuestions is null or empty");
+            return;
+        }
+        if (numQuestions <= 0 || numQuestions > allQuestions.size()) {
+            System.out.println("Error: Invalid numQuestions: " + numQuestions);
+            return;
+        }
+    
+        List<Question> shuffledQuestions = new ArrayList<>(allQuestions);
+        Collections.shuffle(shuffledQuestions);
+        List<Question> selectedQuestions = new ArrayList<>(shuffledQuestions.subList(0, numQuestions));
+        System.out.println("Selected questions count: " + selectedQuestions.size()); 
+    
+        quiz.getAllQuestions().clear();
+    
+        for (Question question : selectedQuestions) {
+            quiz.addQuestion(question);
+        }
+    
+        System.out.println("QuizController: Set " + quiz.getAllQuestions().size() + " questions");
+    
+        setupQuiz();
+    }
+    private void setupQuiz() {      
         progressIndicator.getChildren().clear();
-        questionCircles.clear();
-        
-        // Gere os círculos dinamicamente com base no número de perguntas
-        generateQuestionCircles();
-        
+        questionCircles.clear(); 
         if (quiz.getCurrentQuestion() != null) {
+            // Generate the progress indicator circles
+            generateQuestionCircles();
             displayQuestion(quiz.getCurrentQuestion());
             updateQuestionNumberLabel();
             updateCircleColors();
@@ -99,7 +128,11 @@ public class QuizController {
         List<Question> allQuestions = quiz.getAllQuestions();
         int totalQuestions = allQuestions.size();
         
-        // Determine quantas linhas são necessárias
+        System.out.println("Generating circles for " + totalQuestions + " questions");
+        
+        progressIndicator.getChildren().clear();
+        questionCircles.clear();
+        
         int numRows = (int) Math.ceil((double) totalQuestions / CIRCLES_PER_ROW);
         
         for (int row = 0; row < numRows; row++) {
@@ -129,7 +162,6 @@ public class QuizController {
             progressIndicator.getChildren().add(rowBox);
         }
     }
-    
     private void navigateToQuestion(int questionIndex) {
         if (questionIndex >= 0 && questionIndex < quiz.getAllQuestions().size()) {
             quiz.navigateToQuestion(questionIndex);
@@ -150,24 +182,20 @@ public class QuizController {
             resetOptionButtonStyles();
             disableAllOptions();
             
-            // Configure cada botão de opção com base no número de opções disponíveis
+
             for (int i = 0; i < optionButtons.length; i++) {
                 Button button = optionButtons[i];
                 
                 if (i < optionCount) {
-                    // Este botão deve ser exibido
                     button.setVisible(true);
                     button.setDisable(false);
                     
-                    // Definir o texto da opção (A, B, C, D + conteúdo)
                     char optionLetter = (char)('A' + i);
                     button.setText(optionLetter + "     " + options.get(i));
                     
-                    // Definir o evento de clique
                     final int optionIndex = i;
                     button.setOnAction(event -> handleOptionButtonAction(options.get(optionIndex)));
                 } else {
-                    // Ocultar botões para opções que não existem
                     button.setVisible(false);
                 }
             }
@@ -219,7 +247,6 @@ public class QuizController {
                 "-fx-border-width: 2px; " +
                 "-fx-border-radius: 8px;";
 
-        // Para cada botão visível, verifique se deve ser destacado
         for (Button button : optionButtons) {
             if (button.isVisible()) {
                 String buttonText = button.getText().substring(button.getText().indexOf(" ")).trim();
@@ -321,6 +348,7 @@ public class QuizController {
     public void showFinalResult() {
         try {
             quiz.evaluateAnswers();
+            quiz.saveQuizResults();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("quizResult.fxml"));
             Parent resultView = loader.load();
             QuizResultController resultController = loader.getController();
@@ -333,7 +361,6 @@ public class QuizController {
             Scene resultScene = new Scene(resultView);
             stage.setScene(resultScene);
             
-            // Reapply fullscreen state if it was fullscreen
             if (wasFullScreen) {
                 stage.setFullScreen(true);
                 stage.setFullScreenExitHint("");
@@ -367,6 +394,7 @@ public class QuizController {
         }
         
         quiz.evaluateAnswers();
+        quiz.saveQuizResults();
         int totalQuestion = quiz.getAllQuestions().size();
         int correctQuest = quiz.countCorrectQuest();
         double accuracyRate = (double) correctQuest / totalQuestion;
@@ -387,8 +415,7 @@ public class QuizController {
             button.setDisable(false);
         }
     }
-    
-    // Métodos antigos mantidos para compatibilidade
+
     private void disableOptions() {
         disableAllOptions();
     }

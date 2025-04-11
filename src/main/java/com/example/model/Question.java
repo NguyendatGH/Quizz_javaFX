@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,15 @@ public class Question {
     private List<String> answer;
     private List<String> userChoices;
 
+    // Default constructor (required by Jackson package)
+    public Question() {
+        this.question = null;
+        this.description = null;
+        this.options = new ArrayList<>();
+        this.answer = new ArrayList<>();
+        this.userChoices = new ArrayList<>();
+    }
+
     public Question(String question, String description, List<String> options, List<String> answer) {
         this.question = question;
         this.description = description;
@@ -18,7 +28,7 @@ public class Question {
         this.userChoices = new ArrayList<>();
     }
 
-    public Question(Question cpyQuestion){ //cpy == copy question
+    public Question(Question cpyQuestion) { // cpy == copy question
         this.question = cpyQuestion.question;
         this.description = cpyQuestion.description;
         this.options = new ArrayList<>(cpyQuestion.options);
@@ -26,6 +36,7 @@ public class Question {
         this.userChoices = new ArrayList<>(cpyQuestion.userChoices);
     }
 
+    @JsonProperty("question")
     public String getQuestion() {
         return question;
     }
@@ -34,14 +45,17 @@ public class Question {
         this.question = question;
     }
 
-    public String getDescript(){
+    @JsonProperty("description") 
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String des){
-        this.description = des;
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    @JsonProperty("options")
     public List<String> getOptions() {
         return options;
     }
@@ -50,6 +64,7 @@ public class Question {
         this.options = options;
     }
 
+    @JsonProperty("answer")
     public List<String> getAnswer() {
         return answer;
     }
@@ -58,15 +73,17 @@ public class Question {
         this.answer = answer;
     }
 
-    public List<String> getUserchoice(){
+    @JsonProperty("userchoice")
+    public List<String> getUserchoice() {
         return userChoices;
     }
 
-    public void setUserChoices(List<String> userChoices){
+    public void setUserChoices(List<String> userChoices) {
         this.userChoices = userChoices;
     }
 
-    public String toString(){//overriding the toString() method  
-        return "Question: " +question;  
-       }  
+    @Override
+    public String toString() {
+        return "Question: " + question;
+    }
 }

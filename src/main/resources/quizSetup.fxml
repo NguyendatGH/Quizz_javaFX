@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            style="-fx-background-color: #0C0F23;" fx:controller="com.example.controller.QuizSetupController">
+    <StackPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" 
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox alignment="TOP_CENTER" spacing="20" maxWidth="1200.0" maxHeight="800.0">
+            <padding>
+                <Insets top="40" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Title -->
+            <Label text="Quiz Setup" style="-fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold;">
+                <VBox.margin>
+                    <Insets bottom="30"/>
+                </VBox.margin>
+            </Label>
+            
+            <!-- Total Questions Available -->
+            <Label fx:id="totalQuestionsLabel" text="Total Questions Available: 0" 
+                   style="-fx-text-fill: white; -fx-font-size: 16px;">
+                <VBox.margin>
+                    <Insets bottom="20"/>
+                </VBox.margin>
+            </Label>
+            
+            <!-- Input for Number of Questions -->
+            <VBox spacing="10" alignment="CENTER">
+                <Label text="Enter the number of questions you want to take:" 
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <TextField fx:id="numQuestionsField" prefWidth="200.0" 
+                           style="-fx-background-color: #061449; -fx-text-fill: white; -fx-border-color: #0B206D; -fx-border-width: 2px; -fx-border-radius: 8px;"/>
+            </VBox>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Start Quiz Button -->
+            <Button fx:id="startQuizButton" text="Start Quiz" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-font-size: 14px; -fx-background-color: #9932CC; -fx-text-fill: white; -fx-background-radius: 12;">
+                <VBox.margin>
+                    <Insets top="20" bottom="20"/>
+                </VBox.margin>
+            </Button>
+            
+            <!-- Back to Home Button -->
+            <Button fx:id="backButton" text="Back to Home" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-font-size: 14px; -fx-background-color: #FF1493; -fx-text-fill: white; -fx-background-radius: 12;">
+                <VBox.margin>
+                    <Insets bottom="20"/>
+                </VBox.margin>
+            </Button>
+            
+            <!-- Footer -->
+            <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to right, #FF1493, #9932CC); -fx-background-radius: 5;">
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
+                <Label text="version 1.0" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </HBox>
+        </VBox>
+    </StackPane>
+</AnchorPane>

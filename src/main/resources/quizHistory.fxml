@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            style="-fx-background-color: #0C0F23;" fx:controller="com.example.controller.QuizHistoryController">
+    <StackPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" 
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox alignment="TOP_CENTER" spacing="20" maxWidth="1200.0" maxHeight="800.0">
+            <padding>
+                <Insets top="40" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Title -->
+            <Label text="Quiz History" style="-fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold;">
+                <VBox.margin>
+                    <Insets bottom="30"/>
+                </VBox.margin>
+            </Label>
+            
+            <!-- History Container -->
+            <ScrollPane fitToWidth="true" style="-fx-background-color: #0C0F23; -fx-border-color: transparent;">
+                <content>
+                    <VBox fx:id="historyContainer" spacing="15" alignment="TOP_CENTER" style="-fx-padding: 10px;-fx-background-color: #0C0F23;">
+                        <!-- History entries will be added dynamically -->
+                    </VBox>
+                </content>
+            </ScrollPane>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Back to Home Button -->
+            <Button fx:id="backButton" text="Back to Home" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-font-size: 14px; -fx-background-color: #FF1493; -fx-text-fill: white; -fx-background-radius: 12;">
+                <VBox.margin>
+                    <Insets top="20" bottom="20"/>
+                </VBox.margin>
+            </Button>
+            
+            <!-- Footer -->
+            <HBox alignment="CENTER" style="-fx-background-color: linear-gradient(to right, #FF1493, #9932CC); -fx-background-radius: 5;">
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
+                <Label text="version 1.0" alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </HBox>
+        </VBox>
+    </StackPane>
+</AnchorPane>
