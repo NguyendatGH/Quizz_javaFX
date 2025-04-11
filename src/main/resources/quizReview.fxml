@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #0C0F23;" xmlns="http://javafx.com/javafx/17.0.1"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.QuizReviewController">
+    <children>
+        <!-- Top Header -->
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" AnchorPane.leftAnchor="90.0"
+            AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="30.0">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"
+                    text="Quizz App">
+                </Label>
+            </children>
+        </HBox>
+
+        <!-- Main Content -->
+        <HBox spacing="40" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0"
+            AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="80.0">
+            <children>
+                <!-- Left Side: Question and Options -->
+                <VBox spacing="20" HBox.hgrow="ALWAYS">
+                    <!-- Question - Modified to have min height instead of fixed height -->
+                    <Label fx:id="questionLabel" minHeight="70.0" maxWidth="Infinity"
+                        style="-fx-text-fill: #B15BFF; -fx-font-size: 18px; -fx-border-color: #A6B2DA; -fx-border-radius: 8px; -fx-padding: 15px;"
+                        text="Question will be displayed here" wrapText="true">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets bottom="5.0" top="5.0" />
+                        </VBox.margin>
+                    </Label>
+
+                    <!-- Options - Modified to allow flexible height -->
+                    <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" 
+                        style="-fx-background: #0C0F23; -fx-background-color: #0C0F23;">
+                        <content>
+                            <VBox fx:id="optionsContainer" maxWidth="Infinity" spacing="10" 
+                                style="-fx-background-color: #0C0F23; -fx-padding: 10px;">
+                                <!-- Options will be added here dynamically -->
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="10.0" />
+                        </padding>
+                    </ScrollPane>
+
+                    <!-- Prev/Next Buttons -->
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Button fx:id="prevButton" alignment="CENTER" contentDisplay="RIGHT"
+                            prefHeight="35.0" prefWidth="70.0"
+                            style="-fx-background-color: #FF1493; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;"
+                            text="Prev" />
+                        <Button fx:id="nextButton" alignment="CENTER" contentDisplay="RIGHT"
+                            prefHeight="35.0" prefWidth="69.0"
+                            style="-fx-background-color: #B15BFF; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;"
+                            text="Next" />
+                        <HBox prefHeight="35.0" prefWidth="39.0" />
+                    </HBox>
+                </VBox>
+                <VBox prefHeight="525.0" prefWidth="6.0" style="-fx-background-color: #3B3B3B;" />
+
+                <!-- Right Side: Progress Indicator and Home Button -->
+                <VBox alignment="TOP_CENTER" spacing="20" minWidth="300.0" maxWidth="350.0">
+                    <HBox>
+                        <children>
+                            <Label fx:id="questionNumberLabel" alignment="CENTER_RIGHT"
+                                maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                                style="-fx-text-fill: white; -fx-font-size: 16px;"
+                                text="Question 1/10" wrapText="true">
+                            </Label>
+                        </children>
+                    </HBox>
+                    
+                    <!-- Progress Indicator (dynamic content) -->
+                    <VBox fx:id="progressIndicator" VBox.vgrow="ALWAYS" spacing="10"/>
+                    
+                    <HBox alignment="CENTER_RIGHT">
+                        <children>
+                            <HBox HBox.hgrow="ALWAYS" />
+
+                            <!-- Home Button -->
+                            <Button fx:id="backToResultsButton" alignment="CENTER" contentDisplay="RIGHT"
+                                prefHeight="28.0" prefWidth="97.0"
+                                style="-fx-background-color: #8C4CF5; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;"
+                                text="Result" />
+                        </children>
+                    </HBox>
+                    <VBox VBox.vgrow="ALWAYS" />
+
+                    <!-- Footer -->
+                    <HBox alignment="CENTER" 
+                        style="-fx-background-color: linear-gradient(to right, #FF1493, #B15BFF);">
+                        <padding>
+                            <Insets bottom="5" top="5" left="10" right="10" />
+                        </padding>
+                        <Label fx:id="footerLabel"
+                            style="-fx-text-fill: white; -fx-font-size: 12px;" text="version 1.0" wrapText="true" />
+                    </HBox>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

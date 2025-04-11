@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane style="-fx-background-color: #0C0F23;" xmlns="http://javafx.com/javafx/17.0.1"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.QuizResultController">
+    <children>
+        <!-- Top Header -->
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" AnchorPane.leftAnchor="90.0"
+            AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="30.0">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"
+                    text="Quizz App">
+                </Label>
+            </children>
+        </HBox>
+
+        <!-- Main Content -->
+        <VBox alignment="TOP_CENTER" spacing="20" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="90.0"
+            AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="90.0">
+
+            <!-- Result Icon -->
+            <HBox alignment="CENTER" prefHeight="110.0">
+                <children>
+                    <!-- Circle with emoji face -->
+                    <AnchorPane prefHeight="110.0" prefWidth="110.0" 
+                        style="-fx-background-color: white; -fx-background-radius: 55;">
+                        <children>
+                            <AnchorPane layoutY="60.0" prefHeight="30.0" prefWidth="110.0" 
+                                style="-fx-background-color: #FF1493;">
+                                <children>
+                                    <Text fill="WHITE" layoutX="38.0" layoutY="21.0" text="ᴖ ᴖ" textAlignment="CENTER">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                        </children>
+                    </AnchorPane>
+                </children>
+            </HBox>
+
+            <!-- Result Info -->
+            <Label fx:id="resultTitle" alignment="CENTER" maxWidth="Infinity" wrapText="true"
+                style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" 
+                text="Nice try! keep practice well buddy" />
+
+            <HBox alignment="CENTER" minHeight="80.0" maxWidth="Infinity" spacing="10">
+                <children>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 18px;" text="Your result is:" />
+                    <Text fx:id="scoreText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="16/30">
+                        <font>
+                            <Font name="System Bold" size="36.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+
+            <Label fx:id="correctAnswersLabel" alignment="CENTER" maxWidth="Infinity" wrapText="true"
+                style="-fx-text-fill: #B15BFF; -fx-font-size: 14px;" 
+                text="16 of 30 questions answered correctly" />
+
+            <!-- Scroll view for detailed results - MADE LARGER -->
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: #0C0F23; -fx-background-color: #0C0F23;">
+                <content>
+                    <VBox fx:id="answerContainer" maxWidth="Infinity" spacing="15" 
+                        style="-fx-background-color: #0C0F23; -fx-padding: 15px;">
+                        <!-- Question results will be added here dynamically -->
+                    </VBox>
+                </content>
+                <padding>
+                    <Insets bottom="10.0" top="10.0" />
+                </padding>
+            </ScrollPane>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER" spacing="20">
+                <children>
+                    <Button fx:id="reviewButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" 
+                        onAction="#handleReviewQuiz" prefHeight="40.0" prefWidth="140.0" 
+                        style="-fx-background-color: #B15BFF; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;" 
+                        text="View your quiz" />
+                    <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" 
+                        onAction="#handleExit" prefHeight="40.0" prefWidth="140.0" 
+                        style="-fx-background-color: #FF1493; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;" 
+                        text="Home" />
+                </children>
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+            </HBox>
+
+        </VBox>
+
+        <!-- Footer -->
+        <HBox alignment="CENTER" prefHeight="40.0" style="-fx-background-color: linear-gradient(to right, #FF1493, #B15BFF);" 
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="version 1.0" />
+            </children>
+            <padding>
+                <Insets bottom="5" top="5" />
+            </padding>
+        </HBox>
+    </children>
+</AnchorPane>

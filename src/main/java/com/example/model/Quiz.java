@@ -1,12 +1,12 @@
 package com.example.model;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Quiz {
     private List<Question> questions = new ArrayList<>();
@@ -41,12 +41,15 @@ public class Quiz {
         this.questions = questions;
     }
 
-
     public Question getCurrentQuestion() {
         if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.size()) {
             return questions.get(currentQuestionIndex);
         }
         return null;
+    }
+    
+    public int getCurrentQuestionIndex() {
+        return currentQuestionIndex;
     }
 
     public boolean hasMoreQuestions() {
@@ -55,22 +58,24 @@ public class Quiz {
 
     public void nextQuestion() {
         if (hasMoreQuestions()) {
-            questions.get(currentQuestionIndex);
             currentQuestionIndex++;
         }
     }
 
     public boolean hasPrevQuestion() {
-        if(currentQuestionIndex <= 0){
-            return false;
-        }
-        return true;
+        return currentQuestionIndex > 0;
     }
 
     public void previousQuest() {
         if (hasPrevQuestion()) {
             currentQuestionIndex = Math.max(0, currentQuestionIndex - 1);
-            questions.get(currentQuestionIndex);
+        }
+    }
+    
+    // New method to navigate directly to a specific question
+    public void navigateToQuestion(int index) {
+        if (index >= 0 && index < questions.size()) {
+            currentQuestionIndex = index;
         }
     }
 
@@ -81,6 +86,7 @@ public class Quiz {
     public void setCountCorrectQuest(int c){
         this.correctQuest = c;
     }
+    
     public void evaluateAnswers() {
         correctQuest = 0; 
         for (Question question : questions) {
@@ -103,5 +109,4 @@ public class Quiz {
     public List<Question> getAllQuestions() {
         return new ArrayList<>(questions);
     }
-
 }

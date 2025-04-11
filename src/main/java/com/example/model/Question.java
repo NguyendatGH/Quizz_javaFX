@@ -65,4 +65,8 @@ public class Question {
     public void setUserChoices(List<String> userChoices){
         this.userChoices = userChoices;
     }
+
+    public String toString(){//overriding the toString() method  
+        return "Question: " +question;  
+       }  
 }
